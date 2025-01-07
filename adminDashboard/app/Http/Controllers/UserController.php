@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CompaniesCollection;
-use App\Http\Resources\CompanyResource;
-use App\Models\Company;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class CompanyController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $companies = Company::with('representative')->get();
-
-        return response()->json(new CompaniesCollection($companies));
+        //
     }
 
     /**
@@ -38,17 +35,15 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Company $company)
+    public function show(string $id)
     {
-        $company->load('representative');
-
-        return response()->json(new CompanyResource($company));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Company $company)
+    public function edit(string $id)
     {
         //
     }
@@ -56,7 +51,7 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -64,8 +59,14 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Company $company)
+    public function destroy(string $id)
     {
         //
+    }
+    public function workers()
+    {
+        $workers = User::where('role_id', 1)->get();
+
+        return response()->json(UserResource::collection($workers));
     }
 }

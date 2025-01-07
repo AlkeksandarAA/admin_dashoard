@@ -3,26 +3,26 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
     /** @use HasFactory<\Database\Factories\InvoiceFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     public function workOrder()
     {
-        return $this->hasOne(WorkOrder::class);
+        return $this->belongsTo(WorkOrder::class);
     }
 
     public function issuedBy()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function company()
     {
-        return $this->hasOne(Company::class);
+        return $this->belongsTo(Company::class);
     }
 }

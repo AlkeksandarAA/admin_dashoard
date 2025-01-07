@@ -12,7 +12,7 @@ class Company extends Model
     use HasFactory;
     public function representative()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class, 'rep_id');
     }
 }
 

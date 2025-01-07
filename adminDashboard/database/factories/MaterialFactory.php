@@ -17,7 +17,8 @@ class MaterialFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'material' => $this->faker->word(),
+            'price' => $this->faker->numberBetween(1.00, 150.00),
         ];
     }
 }

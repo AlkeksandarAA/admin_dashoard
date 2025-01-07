@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company;
+use App\Models\Invoice;
+use App\Models\Material;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\WorkOrder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,9 +19,10 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        Material::factory()->count(100)->create();
+        User::factory()->count(40)->create();
+        Company::factory()->count(10)->create();
+        WorkOrder::factory()->count(15)->create();
+        Invoice::factory()->count(10)->create();
     }
 }

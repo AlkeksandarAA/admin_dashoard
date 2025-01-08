@@ -66,7 +66,8 @@ class UserController extends Controller
     public function workers()
     {
         $workers = User::where('role_id', 1)->count();
-
-        return response()->json(['total_workers' => $workers]);
+        $manegers = User::where('role_id', 2)->count();
+        $reps = User::where('role_id', 3)->count();
+        return response()->json(['total_workers' => $workers, 'manegers' => $manegers, 'representatives' => $reps]);
     }
 }

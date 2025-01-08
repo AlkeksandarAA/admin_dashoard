@@ -8,5 +8,15 @@
         <input type="text" class="w-3/5  focus:outline-none py-2" placeholder="Search...">
         </form>
     </div>
+    <div class="container flex mt-5 justify-around">
+<div class= "w-80 h-64">
+    <canvas id="chart1"></canvas>
+</div>
+<div class= "w-80 h-64">
+    <canvas id="chart1"></canvas>
+</div>
+<div class= "w-80 h-64">
+    <canvas id="chart1"></canvas>
+</div>
 </div>
 @endsection

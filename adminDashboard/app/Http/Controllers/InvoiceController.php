@@ -62,4 +62,26 @@ class InvoiceController extends Controller
     {
         //
     }
+
+    public function status()
+    {
+        $paid = Invoice::where('paid', true)->get()->toArray();
+
+        $unpaid = Invoice::where('paid', false)->get()->toArray();
+
+        return response()->json(['paid' => $paid, 'unpaid' => $unpaid]);
+    }
+
+    public function income()
+    {
+        $totalIncome = 0;
+        $paid = Invoice::where('paid', true)->get();
+
+        foreach ($paid as $invoice) {
+            $totalIncome += $invoice->total_price;
+        }
+
+        return response()->json(['totalPrice' => $totalIncome]);
+    }
+
 }

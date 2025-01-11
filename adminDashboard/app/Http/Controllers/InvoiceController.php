@@ -83,5 +83,13 @@ class InvoiceController extends Controller
 
         return response()->json(['totalPrice' => $totalIncome]);
     }
+    public function unPaid()
+    {
+
+        $unpaidInvoice = Invoice::where('paid', false)->sum('total_price');
+
+        return response()->json(['totalUnpaid' => $unpaidInvoice]);
+
+    }
 
 }

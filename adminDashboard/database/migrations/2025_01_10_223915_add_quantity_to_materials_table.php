@@ -10,12 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
-            $table->float('total_price');
-            $table->foreignId('issued_by')->constrained('users');
-            $table->smallInteger('labor_cost');
-            $table->timestamps();
+        Schema::table('materials', function (Blueprint $table) {
+            $table->smallInteger('quantity');
         });
     }
 
@@ -24,6 +20,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('invoices');
+        Schema::table('materials', function (Blueprint $table) {
+            $table->dropColumn('quantity');
+        });
     }
 };

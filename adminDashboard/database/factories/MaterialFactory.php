@@ -19,6 +19,7 @@ class MaterialFactory extends Factory
         return [
             'material' => $this->faker->word(),
             'price' => $this->faker->numberBetween(1.00, 150.00),
+            'quantity' => $this->faker->numberBetween(1, 60),
         ];
     }
 }

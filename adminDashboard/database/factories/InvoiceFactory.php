@@ -25,7 +25,7 @@ class InvoiceFactory extends Factory
             'issued_by' => $this->faker->randomElement(User::all()->pluck('id')->toArray()),
             'total_price' => $this->faker->numberBetween(1000.00, 20000.00),
             'company_id' => $this->faker->randomElement(Company::all()->pluck('id')->toArray()),
-
+            'paid' => $this->faker->boolean(),
         ];
     }
 }

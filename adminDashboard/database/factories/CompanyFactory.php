@@ -19,12 +19,11 @@ class CompanyFactory extends Factory
     {
         $userIds = User::where('role_id', '=', 3)->pluck('id')->toArray();
 
-        dd($userIds);
 
         return [
             'name' => $this->faker->company(),
             'address' => $this->faker->address(),
-            'rep_id' => $this->faker->randomElement(),
+            'rep_id' => $this->faker->randomElement($userIds),
         ];
     }
 }

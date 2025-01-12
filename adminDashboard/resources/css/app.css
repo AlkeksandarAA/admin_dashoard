@@ -6,3 +6,11 @@
     width: 1px; /* Line thickness */
     background-color: black; /* Line color */
 }
+
+#box2 {
+    height: 26rem;
+}
+
+#cardsBox {
+    width: 30%;
+}

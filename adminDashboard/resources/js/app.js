@@ -158,11 +158,11 @@ Promise.all([
 
     document.querySelector("#netIncome").appendChild(netData);
 
-    if (netData > 0) {
+    if (netIncome > 0) {
         document.querySelector("#netIncome").classList.add("bg-green-100");
         netData.classList.add("text-green-500");
     } else {
-        document.querySelector("#netIncome").classList.add("bg-red-100");
+        document.querySelector("#netIncome").classList.add("bg-red-200");
         netData.classList.add("text-red-500");
     }
 });
@@ -180,4 +180,45 @@ fetch("api/unpaid/price")
         unpaidIncome.innerText = formattedIncome;
 
         document.querySelector("#unpaid").appendChild(unpaidIncome);
+    });
+
+fetch("api/active/workorders")
+    .then((response) => response.json())
+    .then((data) => {
+        const ctx = document.getElementById("chart3").getContext("2d");
+
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: data.months,
+                datasets: [
+                    {
+                        label: "Work orders",
+                        data: data.totals,
+                        backgroundColor: "rgba(192, 75, 75, 0.2)",
+                        borderColor: "rgb(192, 75, 75)",
+                        borderWidth: 1,
+                        fill: true,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Months",
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Created work orders",
+                        },
+                    },
+                },
+            },
+        });
     });

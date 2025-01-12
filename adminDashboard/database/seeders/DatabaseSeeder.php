@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         Material::factory()->count(100)->create();
         User::factory()->count(40)->create();
         Company::factory()->count(10)->create();
-        WorkOrder::factory()->count(15)->create();
+        WorkOrder::factory()->count(100)->create();
         Invoice::factory()->count(10)->create();
     }
 }

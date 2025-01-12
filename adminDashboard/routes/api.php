@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +16,5 @@ Route::get('used/materials', [App\Http\Controllers\Materialcontroller::class, 'u
 Route::get('material/cost', [App\Http\Controllers\Materialcontroller::class, 'usedMaterialCost'])->name('MaterialCost');
 
 route::get('unpaid/price', [App\Http\Controllers\InvoiceController::class, 'unPaid'])->name('unpaid.price');
+
+Route::get('active/workorders', [App\Http\Controllers\WorkOrderController::class, 'activeWO'])->name('active.workorders');

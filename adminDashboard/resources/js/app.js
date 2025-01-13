@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
         box1.classList.remove("hidden");
         box2.classList.remove("hidden");
         const usersTable = document.querySelector("#usersTable");
-        usersTable.classList.add("hidden");
+        usersTable.remove();
 
         activeWO();
         invoiceStatus();

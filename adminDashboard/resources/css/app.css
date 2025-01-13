@@ -14,3 +14,23 @@
 #cardsBox {
     width: 30%;
 }
+
+table {
+    border: 1px solid black;
+}
+td {
+    background-color: rgba(128, 128, 128, 0.192);
+    border: 1px solid black;
+    padding: 1%;
+}
+
+th {
+    background-color: gray;
+    padding: 1%;
+    border: 1px solid black;
+    color: white;
+}
+
+.hide {
+    display: none;
+}

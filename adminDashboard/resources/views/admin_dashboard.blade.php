@@ -22,8 +22,8 @@
     </div>
 </div>
 
-    <div class="container flex mt-5 flex-col align-center justify-center">
-        <div class="w-full h-52 flex justify-around mt-10 ">
+    <div id="container" class="container flex mt-5 flex-col align-center justify-center">
+        <div id="box1" class="w-full h-52 flex justify-around mt-10 ">
             <div class="w-3/5 bg-white p-4 flex justify-around rounded shadow-2xl">
                 <div class="flex-1 mr-5">
                 <canvas  id="chart1"></canvas>

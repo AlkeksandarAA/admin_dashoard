@@ -13,13 +13,13 @@
 <body class="bg-stone-200">
 
     <div class="grid grid-cols-[auto,1fr] h-screen">
-        <div class="w-60 bg-white p-4">
-            <a href="#">
-                <img src="https://picsum.photos/75/75" alt="random img" class="rounded-full block ml-4 mt-4">
-            </a>
+        <div class="w-52 bg-white p-4">
+            <div class="flex items-center justify-center cursor-pointer " id="home">
+                <img src="{{asset('media_1eeac4f414fef7a2538f45d131ecae95e859923d9.png')}}" alt="random img" class="rounded-full block h-12" >
+        </div>
             <ul class="list-none p-2">
-                <li tabindex="0" class="py-2 px-5 rounded-lg focus:outline-none focus:ring focus:ring-blue-100 hover:bg-blue-100 transition duration-200">
-                    Hello World
+                <li pointer id="employeeList" tabindex="0" class="cursor-pointer py-2 px-5 rounded-lg focus:outline-none focus:ring focus:ring-blue-100 hover:bg-blue-100 transition duration-200">
+                    Employee list
                 </li>
                 <li tabindex="0" class="py-2 px-5 rounded-lg focus:outline-none focus:ring focus:ring-blue-100 hover:bg-blue-100 transition duration-200">
                     Hello World

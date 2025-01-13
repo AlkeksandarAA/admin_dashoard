@@ -18,3 +18,5 @@ Route::get('material/cost', [App\Http\Controllers\Materialcontroller::class, 'us
 route::get('unpaid/price', [App\Http\Controllers\InvoiceController::class, 'unPaid'])->name('unpaid.price');
 
 Route::get('active/workorders', [App\Http\Controllers\WorkOrderController::class, 'activeWO'])->name('active.workorders');
+
+Route::get('all/users', [App\Http\Controllers\UserController::class, 'index'])->name('all.users');

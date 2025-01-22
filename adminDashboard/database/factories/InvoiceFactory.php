@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Company;
+use App\Models\Material;
 use App\Models\WorkOrder;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -26,6 +27,7 @@ class InvoiceFactory extends Factory
             'total_price' => $this->faker->numberBetween(1000.00, 20000.00),
             'company_id' => $this->faker->randomElement(Company::all()->pluck('id')->toArray()),
             'paid' => $this->faker->boolean(),
+            'material_used' => $this->faker->randomElement(Material::all()->pluck('id')->toArray()),
         ];
     }
 }

@@ -1,12 +1,17 @@
 import { allUsers } from "./allUsers.js";
 import { activeWO, invoiceStatus, allWorkers } from "./myCharts.js";
 
+let isEventHandled = false;
+
 export function showUsers() {
     document
         .querySelector("#employeeList")
         .addEventListener("click", async () => {
             document.querySelector("#box1").classList.add("hidden");
             document.querySelector("#box2").classList.add("hidden");
+            if (isEventHandled) return;
+
+            isEventHandled = true;
 
             try {
                 const htmlContent = await allUsers();
@@ -27,7 +32,7 @@ export function home() {
             box2.classList.remove("hidden");
             const usersTable = document.querySelector("#usersTable");
             usersTable.remove();
-
+            isEventHandled = false;
             activeWO();
             invoiceStatus();
             allWorkers();

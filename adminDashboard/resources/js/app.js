@@ -7,7 +7,7 @@ import {
     netIncome,
     unpaidInvoice,
 } from "./statistics.js";
-
+import { allCompanies } from "./companies.js";
 activeWO();
 invoiceStatus();
 allWorkers();
@@ -17,3 +17,4 @@ netIncome();
 unpaidInvoice();
 showUsers();
 home();
+allCompanies();

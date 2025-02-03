@@ -14,7 +14,10 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::with('representative')->get();
+        $companies = Company::with('representative', 'invoices')->get();
+
+        dd($companies);
+
 
         return response()->json(new CompaniesCollection($companies));
     }

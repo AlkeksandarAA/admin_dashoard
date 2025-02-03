@@ -20,3 +20,5 @@ route::get('unpaid/price', [App\Http\Controllers\InvoiceController::class, 'unPa
 Route::get('active/workorders', [App\Http\Controllers\WorkOrderController::class, 'activeWO'])->name('active.workorders');
 
 Route::get('all/users', [App\Http\Controllers\UserController::class, 'index'])->name('all.users');
+
+Route::get('update/user', [App\Http\Controllers\UserController::class, 'update'])->name('update.user');

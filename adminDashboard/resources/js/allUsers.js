@@ -21,6 +21,7 @@ export async function allUsers() {
 
         data.users.forEach((user) => {
             const button = document.createElement("button");
+            button.id = "updateUser" + user.id;
             const button2 = document.createElement("button");
             const button3 = document.createElement("button");
 

@@ -27,7 +27,7 @@
                 </li>
                 <li id="companiesList" tabindex="0"
                     class=" cursor-pointer py-2 px-5 rounded-lg focus:outline-none focus:ring focus:ring-blue-100 hover:bg-blue-100 transition duration-200">
-                    Compnies
+                    Companies
                 </li>
                 <li tabindex="0"
                     class=" cursor-pointer py-2 px-5 rounded-lg focus:outline-none focus:ring focus:ring-blue-100 hover:bg-blue-100 transition duration-200">

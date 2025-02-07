@@ -77,4 +77,24 @@ class CompanyController extends Controller
     {
         //
     }
+
+    public function options()
+    {
+
+        $company = Company::all();
+
+        $mappedOption = $company->map(function ($company) {
+            return [
+                'id' => $company->id,
+                'name' => $company->name,
+            ];
+        });
+
+        $someJson = [
+            'name' => 'Alexandar'
+        ];
+
+        return response()->json($someJson);
+
+    }
 }

@@ -16,10 +16,16 @@ class CompanyController extends Controller
     {
         $companies = Company::with('representative', 'invoices')->get();
 
-        dd($companies);
+        $mappedCompanies = $companies->map(function ($company) {
+            return [
+                'name' => $company->name,
+                'address' => $company->address,
+                'representative' => $company->representative->name,
+                'invoices' => $company->invoices->pluck('id')->toArray(),
+            ];
+        });
 
-
-        return response()->json(new CompaniesCollection($companies));
+        return response()->json(new CompaniesCollection($mappedCompanies));
     }
 
     /**

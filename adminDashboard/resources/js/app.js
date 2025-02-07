@@ -1,5 +1,5 @@
 import "./bootstrap";
-import { showUsers, home } from "./pages.js";
+import { showUsers, home, showCompanies } from "./pages.js";
 import { activeWO, invoiceStatus, allWorkers } from "./myCharts.js";
 import {
     totalIncome,
@@ -7,7 +7,6 @@ import {
     netIncome,
     unpaidInvoice,
 } from "./statistics.js";
-import { allCompanies } from "./companies.js";
 activeWO();
 invoiceStatus();
 allWorkers();
@@ -17,4 +16,4 @@ netIncome();
 unpaidInvoice();
 showUsers();
 home();
-allCompanies();
+showCompanies();

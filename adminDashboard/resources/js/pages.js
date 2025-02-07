@@ -1,25 +1,30 @@
 import { allUsers } from "./allUsers.js";
 import { activeWO, invoiceStatus, allWorkers } from "./myCharts.js";
+import { allCompanies } from "./companies.js";
 
-let isEventHandled = false;
+function removeTables() {
+    const tables = document.querySelectorAll("table");
+    tables.forEach((table) => table.remove());
+}
 
 export function showUsers() {
-    document
-        .querySelector("#employeeList")
-        .addEventListener("click", async () => {
-            document.querySelector("#box1").classList.add("hidden");
-            document.querySelector("#box2").classList.add("hidden");
-            if (isEventHandled) return;
+    const employeeListButton = document.querySelector("#employeeList");
 
-            isEventHandled = true;
+    if (employeeListButton.dataset.listenerAdded) return;
+    employeeListButton.dataset.listenerAdded = true;
 
-            try {
-                const htmlContent = await allUsers();
-                document.querySelector("#container").innerHTML += htmlContent;
-            } catch (error) {
-                console.error("Error handling allUsers:", error);
-            }
-        });
+    employeeListButton.addEventListener("click", async () => {
+        document.querySelector("#box1").classList.add("hidden");
+        document.querySelector("#box2").classList.add("hidden");
+        removeTables();
+
+        try {
+            const htmlContent = await allUsers();
+            document.querySelector("#container").innerHTML += htmlContent;
+        } catch (error) {
+            console.error("Error handling allUsers:", error);
+        }
+    });
 }
 
 export function home() {
@@ -30,12 +35,30 @@ export function home() {
 
             box1.classList.remove("hidden");
             box2.classList.remove("hidden");
-            const usersTable = document.querySelector("#usersTable");
-            usersTable.remove();
-            isEventHandled = false;
+            document.querySelector("table").remove();
+            removeTables();
             activeWO();
             invoiceStatus();
             allWorkers();
         });
+    });
+}
+export function showCompanies() {
+    const companiesListButton = document.querySelector("#companiesList");
+
+    if (companiesListButton.dataset.listenerAdded) return;
+    companiesListButton.dataset.listenerAdded = true;
+
+    companiesListButton.addEventListener("click", async () => {
+        document.querySelector("#box1").classList.add("hidden");
+        document.querySelector("#box2").classList.add("hidden");
+
+        removeTables();
+        try {
+            const htmlContent = await allCompanies();
+            document.querySelector("#container").innerHTML += htmlContent;
+        } catch (error) {
+            console.error("Error handling allUsers:", error);
+        }
     });
 }

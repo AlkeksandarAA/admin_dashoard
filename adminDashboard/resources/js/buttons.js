@@ -1,13 +1,26 @@
-function optionComanies() {
-    fetch();
+async function optionComanies() {
+    try {
+        const response = await fetch("api/company/get/option");
+        const companies = await response.json();
+        return companies;
+    } catch (error) {
+        console.error("Error fetching companies:", error);
+        return [];
+    }
 }
 
-function updateUser() {
+export async function updateUser(user) {
     const tables = document.querySelectorAll("table");
     tables.forEach((table) => table.remove());
 
     const form = document.createElement("form");
     form.id = "updateUserForm";
+
+    const userIdInput = document.createElement("input");
+    userIdInput.type = "hidden";
+    userIdInput.name = "user_id";
+    userIdInput.value = user.id;
+    form.appendChild(userIdInput);
 
     const nameLabel = document.createElement("label");
     nameLabel.textContent = "Name:";
@@ -17,7 +30,7 @@ function updateUser() {
     nameInput.type = "text";
     nameInput.id = "nameInput";
     nameInput.name = "name";
-    nameInput.required = true;
+    nameInput.value = user.name;
 
     const emailLabel = document.createElement("label");
     emailLabel.textContent = "Email:";
@@ -27,58 +40,75 @@ function updateUser() {
     emailInput.type = "email";
     emailInput.id = "emailInput";
     emailInput.name = "email";
-    emailInput.required = true;
+    emailInput.value = user.email;
 
     const companyLabel = document.createElement("label");
+    const companySelect = document.createElement("select");
     companyLabel.textContent = "Company:";
     companyLabel.setAttribute("for", "companySelect");
-
-    const companySelect = document.createElement("select");
     companySelect.id = "companySelect";
     companySelect.name = "company";
 
-    allCompanies.forEach((company) => {
-        const option = document.createElement("option");
-        option.value = company.id;
-        option.textContent = company.name;
-        companySelect.appendChild(option);
-    });
-
+    if (user.role_id === 3) {
+        try {
+            const companies = await optionComanies();
+            companies.forEach((company) => {
+                const option = document.createElement("option");
+                option.value = company.id;
+                option.textContent = company.name;
+                companySelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error("Error fetching companies:", error);
+        }
+    }
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
     submitButton.textContent = "Submit";
 
     form.appendChild(nameLabel);
     form.appendChild(nameInput);
-    form.appendChild(document.createElement("br")); // Line break
+    form.appendChild(document.createElement("br"));
     form.appendChild(emailLabel);
     form.appendChild(emailInput);
-    form.appendChild(document.createElement("br")); // Line break
-    form.appendChild(companyLabel);
-    form.appendChild(companySelect);
-    form.appendChild(document.createElement("br")); // Line break
+    form.appendChild(document.createElement("br"));
+    if (user.role_id === 3) {
+        form.appendChild(companyLabel);
+        form.appendChild(companySelect);
+        form.appendChild(document.createElement("br"));
+    }
     form.appendChild(submitButton);
 
-    // Append the form to a container (e.g., #container)
     const container = document.querySelector("#container");
-    container.innerHTML = ""; // Clear the container
     container.appendChild(form);
 
-    // Add form submission handler
     form.addEventListener("submit", (event) => {
-        event.preventDefault(); // Prevent the form from submitting
+        event.preventDefault();
 
-        // Get form data
         const formData = new FormData(form);
-        const name = formData.get("name");
-        const email = formData.get("email");
-        const companyId = formData.get("company");
-
-        // Log the form data (or send it to an API)
-        console.log("Name:", name);
-        console.log("Email:", email);
-        console.log("Company ID:", companyId);
-
-        // You can add further logic here (e.g., send data to an API)
+        const _token = document.querySelector('meta[name="csrf-token"]');
+        const userData = {
+            user_id: formData.get("user_id"),
+            name: formData.get("name"),
+            email: formData.get("email"),
+            company: formData.get("company"),
+            _token: _token,
+        };
+        fetch("api/update/user", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": _token,
+            },
+            body: JSON.stringify(userData),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("User updated successfully:", data);
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error("Error updating user:", error);
+            });
     });
 }

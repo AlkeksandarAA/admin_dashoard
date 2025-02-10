@@ -21,6 +21,8 @@ Route::get('active/workorders', [App\Http\Controllers\WorkOrderController::class
 
 Route::get('all/users', [App\Http\Controllers\UserController::class, 'index'])->name('all.users');
 
-Route::get('update/user', [App\Http\Controllers\UserController::class, 'update'])->name('update.user');
+Route::patch('update/user', [App\Http\Controllers\UserController::class, 'update'])->name('update.user');
 
-Route::get('company/options', [App\Http\Controllers\CompanyController::class, 'options'])->name('company.options');
+Route::get('company/get/option', [App\Http\Controllers\CompanyController::class, 'getOptions'])->name('company.options');
+
+// Route::put('updated/user', [App\Http\Controllers\UserController::class]);

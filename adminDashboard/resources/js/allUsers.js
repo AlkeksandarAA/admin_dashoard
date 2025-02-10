@@ -1,3 +1,5 @@
+import { updateUser } from "./buttons";
+
 export async function allUsers() {
     try {
         const response = await fetch("api/all/users");
@@ -20,8 +22,7 @@ export async function allUsers() {
         table.classList.add("table-fixed", "m-auto", "w-5/6");
 
         data.users.forEach((user) => {
-            const button = document.createElement("button");
-            button.id = "updateUser" + user.id;
+            const updateButton = document.createElement("button");
             const button2 = document.createElement("button");
             const button3 = document.createElement("button");
 
@@ -41,28 +42,35 @@ export async function allUsers() {
 
             const actionsCell = document.createElement("td");
 
-            button.innerText = "Update";
+            updateButton.innerText = "Update";
             button2.innerText = "Delete";
             button3.innerText = "Promote";
 
-            button.classList.add("bg-orange-500", "p-3", "mr-3");
+            updateButton.classList.add("bg-orange-500", "p-3", "mr-3");
             button2.classList.add("bg-red-500", "p-3", "mr-3");
             button3.classList.add("bg-green-500", "p-3");
 
+            document.querySelector("#updateUser" + user.id);
+
             if (user.role_id != 3) {
-                actionsCell.appendChild(button);
+                actionsCell.appendChild(updateButton);
                 actionsCell.appendChild(button2);
                 actionsCell.appendChild(button3);
             } else {
-                actionsCell.appendChild(button);
+                actionsCell.appendChild(updateButton);
                 actionsCell.appendChild(button2);
             }
             row.appendChild(actionsCell);
 
             table.appendChild(row);
+
+            updateButton.addEventListener("click", () => {
+                console.log("Update button clicked for user:", user);
+                updateUser(user);
+            });
         });
 
-        return table.outerHTML;
+        return table;
     } catch (error) {
         console.log("Error:", error);
         return "";

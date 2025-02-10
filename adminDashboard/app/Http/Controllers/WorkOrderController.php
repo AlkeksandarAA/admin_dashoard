@@ -52,7 +52,7 @@ class WorkOrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateWorkOrderRequest $request, WorkOrder $workOrder)
+    public function update(StoreWorkOrderRequest $request, WorkOrder $workOrder)
     {
         //
     }

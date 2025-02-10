@@ -49,7 +49,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $company->load('representative');
+        $company->load('representative', 'invoices');
 
         return response()->json(new CompanyResource($company));
     }
@@ -78,7 +78,7 @@ class CompanyController extends Controller
         //
     }
 
-    public function options()
+    public function getOptions()
     {
 
         $company = Company::all();
@@ -89,12 +89,7 @@ class CompanyController extends Controller
                 'name' => $company->name,
             ];
         });
-
-        $someJson = [
-            'name' => 'Alexandar'
-        ];
-
-        return response()->json($someJson);
+        return response()->json($mappedOption);
 
     }
 }

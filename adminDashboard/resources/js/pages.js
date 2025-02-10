@@ -2,9 +2,34 @@ import { allUsers } from "./allUsers.js";
 import { activeWO, invoiceStatus, allWorkers } from "./myCharts.js";
 import { allCompanies } from "./companies.js";
 
-function removeTables() {
+export function hideHomeBoxes() {
+    const box = document.querySelector("#box1");
+    const box2 = document.querySelector("#box2");
+    if (box && box2) {
+        box.classList.add("hidden");
+        box2.classList.add("hidden");
+    }
+}
+
+export function showHomeBoxes() {
+    const box = document.querySelector("#box1");
+    const box2 = document.querySelector("#box2");
+    if (box && box2) {
+        box.classList.remove("hidden");
+        box2.classList.remove("hidden");
+    }
+}
+
+export function removeTables() {
     const tables = document.querySelectorAll("table");
     tables.forEach((table) => table.remove());
+}
+
+export function clearForm() {
+    const from = document.querySelector("form");
+    if (from) {
+        from.remove();
+    }
 }
 
 export function showUsers() {
@@ -14,13 +39,13 @@ export function showUsers() {
     employeeListButton.dataset.listenerAdded = true;
 
     employeeListButton.addEventListener("click", async () => {
-        document.querySelector("#box1").classList.add("hidden");
-        document.querySelector("#box2").classList.add("hidden");
+        hideHomeBoxes();
         removeTables();
+        clearForm();
 
         try {
-            const htmlContent = await allUsers();
-            document.querySelector("#container").innerHTML += htmlContent;
+            const table = await allUsers();
+            document.querySelector("#container").appendChild(table);
         } catch (error) {
             console.error("Error handling allUsers:", error);
         }
@@ -30,12 +55,8 @@ export function showUsers() {
 export function home() {
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("#home").addEventListener("click", () => {
-            const box1 = document.querySelector("#box1");
-            const box2 = document.querySelector("#box2");
-
-            box1.classList.remove("hidden");
-            box2.classList.remove("hidden");
-            document.querySelector("table").remove();
+            clearForm();
+            showHomeBoxes();
             removeTables();
             activeWO();
             invoiceStatus();
@@ -50,10 +71,9 @@ export function showCompanies() {
     companiesListButton.dataset.listenerAdded = true;
 
     companiesListButton.addEventListener("click", async () => {
-        document.querySelector("#box1").classList.add("hidden");
-        document.querySelector("#box2").classList.add("hidden");
-
+        hideHomeBoxes();
         removeTables();
+        clearForm();
         try {
             const htmlContent = await allCompanies();
             document.querySelector("#container").innerHTML += htmlContent;

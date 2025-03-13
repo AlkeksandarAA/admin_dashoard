@@ -105,7 +105,7 @@ export async function updateUser(user) {
             .then((response) => response.json())
             .then((data) => {
                 console.log("User updated successfully:", data);
-                window.location.reload();
+                // window.location.reload();
             })
             .catch((error) => {
                 console.error("Error updating user:", error);

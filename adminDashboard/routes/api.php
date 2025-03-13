@@ -25,4 +25,6 @@ Route::patch('update/user', [App\Http\Controllers\UserController::class, 'update
 
 Route::get('company/get/option', [App\Http\Controllers\CompanyController::class, 'getOptions'])->name('company.options');
 
+Route::get('invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'show'])->name('show.invoice');
+
 // Route::put('updated/user', [App\Http\Controllers\UserController::class]);

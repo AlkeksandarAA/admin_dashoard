@@ -11,11 +11,11 @@ class WorkOrder extends Model
     /** @use HasFactory<\Database\Factories\CompanyFactory> */
     use HasFactory;
 
-    public function materials()
+    public function material()
     {
-        return $this->belongsToMany(Material::class);
+        return $this->belongsTo(Material::class, 'mats_id');
     }
-    public function Ordered()
+    public function ordered()
     {
         return $this->belongsTo(User::class, "order_by");
     }

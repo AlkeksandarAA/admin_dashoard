@@ -51,6 +51,8 @@ class CompanyController extends Controller
     {
         $company->load('representative', 'invoices');
 
+
+
         return response()->json(new CompanyResource($company));
     }
 

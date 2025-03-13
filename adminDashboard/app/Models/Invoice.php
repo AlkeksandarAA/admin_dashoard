@@ -13,12 +13,12 @@ class Invoice extends Model
 
     public function workOrder()
     {
-        return $this->belongsTo(WorkOrder::class);
+        return $this->belongsTo(WorkOrder::class, 'work_order');
     }
 
     public function issuedBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id');
     }
 
     public function company()

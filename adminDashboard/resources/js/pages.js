@@ -76,7 +76,7 @@ export function showCompanies() {
         clearForm();
         try {
             const htmlContent = await allCompanies();
-            document.querySelector("#container").innerHTML += htmlContent;
+            document.querySelector("#container").appendChild(htmlContent);
         } catch (error) {
             console.error("Error handling allUsers:", error);
         }

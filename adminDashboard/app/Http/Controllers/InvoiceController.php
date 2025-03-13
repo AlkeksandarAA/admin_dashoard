@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\InvoiceResource;
+use App\Http\Resources\WorkOrderResource;
 use App\Models\Invoice;
+use App\Models\WorkOrder;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -34,9 +37,13 @@ class InvoiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Invoice $invoice)
+    public function show(int $invoiceId)
     {
-        //
+        $invoice = Invoice::with(['workOrder', 'issuedBy', 'company'])->findOrFail($invoiceId);
+
+
+        return response()->json(['Invoice' => new InvoiceResource($invoice)]);
+
     }
 
     /**

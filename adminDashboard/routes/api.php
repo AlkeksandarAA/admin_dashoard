@@ -27,4 +27,6 @@ Route::get('company/get/option', [App\Http\Controllers\CompanyController::class,
 
 Route::get('invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'show'])->name('show.invoice');
 
+Route::delete('delete/{user}', [App\Http\Controllers\InvoiceController::class, 'destroy'])->name('destroy.user');
+
 // Route::put('updated/user', [App\Http\Controllers\UserController::class]);

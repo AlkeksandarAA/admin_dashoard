@@ -1,4 +1,4 @@
-import { updateUser } from "./buttons";
+import { updateUser, deleteUser } from "./buttons";
 
 export async function allUsers() {
     try {
@@ -22,8 +22,10 @@ export async function allUsers() {
         table.classList.add("table-fixed", "m-auto", "w-5/6");
 
         data.users.forEach((user) => {
+            console.log(user);
+            gid;
             const updateButton = document.createElement("button");
-            const button2 = document.createElement("button");
+            const deleteButton = document.createElement("button");
             const button3 = document.createElement("button");
 
             const row = document.createElement("tr");
@@ -43,22 +45,20 @@ export async function allUsers() {
             const actionsCell = document.createElement("td");
 
             updateButton.innerText = "Update";
-            button2.innerText = "Delete";
+            deleteButton.innerText = "Delete";
             button3.innerText = "Promote";
 
             updateButton.classList.add("bg-orange-500", "p-3", "mr-3");
-            button2.classList.add("bg-red-500", "p-3", "mr-3");
+            deleteButton.classList.add("bg-red-500", "p-3", "mr-3");
             button3.classList.add("bg-green-500", "p-3");
-
-            document.querySelector("#updateUser" + user.id);
 
             if (user.role_id != 3) {
                 actionsCell.appendChild(updateButton);
-                actionsCell.appendChild(button2);
+                actionsCell.appendChild(deleteButton);
                 actionsCell.appendChild(button3);
             } else {
                 actionsCell.appendChild(updateButton);
-                actionsCell.appendChild(button2);
+                actionsCell.appendChild(deleteButton);
             }
             row.appendChild(actionsCell);
 
@@ -67,6 +67,9 @@ export async function allUsers() {
             updateButton.addEventListener("click", () => {
                 console.log("Update button clicked for user:", user);
                 updateUser(user);
+            });
+            deleteButton.addEventListener("click", () => {
+                deleteUser(user);
             });
         });
 

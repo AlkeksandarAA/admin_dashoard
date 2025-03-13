@@ -112,3 +112,20 @@ export async function updateUser(user) {
             });
     });
 }
+export async function deleteUser($user) {
+    if (!confirm(`Are u sure u want to delete ${$user.id}`))
+        try {
+            const deleteUser = await fetch(`api/delete/${$user.name}`, {
+                method: "DELETE",
+            });
+
+            if (!response.ok) {
+                throw new error(`ERROR , STATUS ${response.STATUS}`);
+            }
+            const data = await response.json();
+            console.log("User deleted:", data);
+            location.reload();
+        } catch (error) {
+            console.error("Error deleting user:", error);
+        }
+}

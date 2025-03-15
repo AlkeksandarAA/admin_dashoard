@@ -23,7 +23,6 @@ export async function allUsers() {
 
         data.users.forEach((user) => {
             console.log(user);
-            gid;
             const updateButton = document.createElement("button");
             const deleteButton = document.createElement("button");
             const button3 = document.createElement("button");

@@ -29,4 +29,8 @@ Route::get('invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'show
 
 Route::delete('delete/{user}', [App\Http\Controllers\InvoiceController::class, 'destroy'])->name('destroy.user');
 
+Route::post('create/user', [App\Http\Controllers\UserController::class, 'store'])->name('store.user');
+
+Route::get('show/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('show.user');
+
 // Route::put('updated/user', [App\Http\Controllers\UserController::class]);

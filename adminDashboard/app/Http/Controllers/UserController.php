@@ -7,6 +7,7 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -23,15 +24,24 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $validateData = $request->validated();
+
+        $validateData['password'] = bcrypt($validateData['password']);
+
+        $newUser = User::create($validateData);
+
+        Log::info('Validated data:', $validateData);
+
+
+        return response()->json($newUser, 201);
     }
 
     /**
@@ -39,7 +49,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return response()->json($user);
     }
 
     /**

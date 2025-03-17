@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->foreignId('issued_by')->constrained('users');
             $table->smallInteger('labor_cost');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

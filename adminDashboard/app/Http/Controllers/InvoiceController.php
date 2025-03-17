@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Log;
+use App\Http\Requests\InvoiceRequest;
 use App\Http\Resources\InvoiceResource;
 use App\Http\Resources\WorkOrderResource;
 use App\Models\Invoice;
@@ -29,9 +30,18 @@ class InvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(InvoiceRequest $request)
     {
-        //
+
+        Log::info("Store method was called!");
+
+        $validatedData = $request->validated();
+
+        Invoice::create($validatedData);
+
+        Log::info("Validated data: ", $validatedData);
+
+        return response()->json("Invoice created");
     }
 
     /**
@@ -57,17 +67,28 @@ class InvoiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Invoice $invoice)
+    public function update(InvoiceRequest $request, int $id)
     {
-        //
+        $validateData = $request->validated();
+
+
+        $invoice = Invoice::findOrFail($id);
+
+        $invoice->update($validateData);
+
+        return response()->json("invoice updated");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Invoice $invoice)
+    public function destroy(int $id)
     {
-        //
+        $invoice = Invoice::findOrFail($id);
+
+        $invoice->delete();
+
+        return response()->json($invoice);
     }
 
     public function status()

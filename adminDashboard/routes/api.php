@@ -33,4 +33,11 @@ Route::post('create/user', [App\Http\Controllers\UserController::class, 'store']
 
 Route::get('show/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('show.user');
 
+Route::post("create/invoice", [App\Http\Controllers\InvoiceController::class, "store"])->name('create.invoice');
+
+Route::patch("update/invoice/{id}", [App\Http\Controllers\InvoiceController::class, "update"])->name('update.invoice');
+
+route::delete('delete/invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'destroy'])->name('delete.invoice');
+
+
 // Route::put('updated/user', [App\Http\Controllers\UserController::class]);

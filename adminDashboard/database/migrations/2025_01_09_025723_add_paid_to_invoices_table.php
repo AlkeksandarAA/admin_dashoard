@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('invoices', function (Blueprint $table) {
-            $table->boolean('paid');
+            $table->boolean('paid')->default(false);
         });
     }
 
